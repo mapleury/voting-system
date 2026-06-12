@@ -12,8 +12,8 @@ import {
 const db = {
  getCandidates: async () => {
   const snap = await getDocs(collection(firestore, "candidates"));
-  console.log("Total docs found:", snap.size);         // should say 3
-  snap.docs.forEach(d => console.log(d.id, d.data())); // should show c1, c2, c3
+  console.log("Total docs found:", snap.size);       
+  snap.docs.forEach(d => console.log(d.id, d.data()));
   return snap.docs.map(d => ({ id: d.id, ...d.data() }));
 },
   vote: async (candidateId) => {
@@ -1055,7 +1055,7 @@ function AdminPanel({ onSignOut }) {
                   {i === 0 && <span className="crown">✦</span>}
                 </div>
                 <div className="lb-breakdown">
-                  <div className="lb-stat blue">Votes <strong>{c.votes.toLocaleString()}</strong></div>
+                 <div className="lb-stat blue">Votes <strong>{(c.votes ?? 0).toLocaleString()}</strong></div>
                   <div className="lb-stat blue">Vote Score <strong>{c.voteScore.toFixed(1)}</strong></div>
                   <div className="lb-stat red">Judge Avg <strong>{c.judgeAvg.toFixed(1)}</strong></div>
                 </div>
